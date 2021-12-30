@@ -116,6 +116,7 @@ def time_stats(df, month, day):
     # display the most common day of week if NOT filtered by
     if not day:
         common_day = df['Day_name'].mode()[0]
+	print("The Most Common Month is: {}".format(common_day))
     else:
         print("You have filtered your query to the day of {}".format(day))
 
@@ -203,7 +204,16 @@ def user_stats(df, city):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
-
+def disp_df(df):
+    i = 0
+    while True:
+        print(df.iloc[i:i+5, : ])
+        more_5 = input('Would you like to view the next 5 rows?([y], no)').lower()
+        if more_5 == 'no':
+            break
+        else:
+            i += 5
+            continue
 
 def main():
     while True:
@@ -216,6 +226,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df, city)
+	disp_df(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
